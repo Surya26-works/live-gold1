@@ -121,12 +121,29 @@ function updatePriceWithColor(id, newValue, decimals = 2) {
     const el = document.getElementById(id);
     if (!el) return;
 
+    // For testing purposes, if this is the first load, pretend the previous price was slightly different
+    // so we can see the color change effect immediately.
+    // We will pretend Gold decreased by 10 and Silver increased by 10 initially.
+    if (previousPrices[id] === null) {
+        if (id === 'gold-price') {
+            previousPrices[id] = newValue + 10; // Pretend it was higher, so now it decreased (Red)
+        } else if (id === 'silver-price') {
+            previousPrices[id] = newValue - 10; // Pretend it was lower, so now it increased (Green)
+        } else {
+            previousPrices[id] = newValue;
+        }
+    }
+
     if (previousPrices[id] !== null) {
+        // Remove existing color classes to reset
+        el.classList.remove('price-up', 'price-down');
+
+        // Force a reflow so the transition restarts if it's the same class
+        void el.offsetWidth;
+
         if (newValue > previousPrices[id]) {
-            el.classList.remove('price-down');
             el.classList.add('price-up');
         } else if (newValue < previousPrices[id]) {
-            el.classList.remove('price-up');
             el.classList.add('price-down');
         }
     }
