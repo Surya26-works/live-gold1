@@ -1,4 +1,8 @@
 let pollInterval = null;
+let previousPrices = {
+    'gold-price': null,
+    'silver-price': null
+};
 
 function startPolling() {
     fetchRates();
@@ -71,8 +75,8 @@ async function fetchRates() {
         errorEl.classList.add('hidden');
 
         // Update main prices
-        setValue('gold-price', data.goldPricePerGramInr);
-        setValue('silver-price', data.silverPricePerGramInr);
+        updatePriceWithColor('gold-price', data.goldPricePerGramInr);
+        updatePriceWithColor('silver-price', data.silverPricePerGramInr);
         setValue('gold-usd', data.xauUsd, 2);
         setValue('silver-usd', data.xagUsd, 2);
         setValue('usd-inr', data.usdInr, 2);
@@ -111,4 +115,26 @@ function setValue(id, value, decimals = 2) {
             maximumFractionDigits: decimals
         });
     }
+}
+
+function updatePriceWithColor(id, newValue, decimals = 2) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    if (previousPrices[id] !== null) {
+        if (newValue > previousPrices[id]) {
+            el.classList.remove('price-down');
+            el.classList.add('price-up');
+        } else if (newValue < previousPrices[id]) {
+            el.classList.remove('price-up');
+            el.classList.add('price-down');
+        }
+    }
+
+    previousPrices[id] = newValue;
+
+    el.textContent = newValue.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    });
 }

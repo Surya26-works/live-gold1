@@ -234,6 +234,14 @@ h1 {
     color: var(--silver);
 }
 
+.amount.price-up {
+    color: #10b981 !important;
+}
+
+.amount.price-down {
+    color: #ef4444 !important;
+}
+
 .unit {
     font-size: 0.8rem;
     font-weight: 500;
