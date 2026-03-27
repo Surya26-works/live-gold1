@@ -58,7 +58,7 @@ body {
 
 .app-container {
     width: 100%;
-    max-width: 640px;
+    max-width: 720px;
     padding: 0 1.5rem 3rem;
     display: flex;
     flex-direction: column;
@@ -148,7 +148,7 @@ h1 {
 /* ===== Cards Grid ===== */
 .cards-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
 }
 
@@ -200,6 +200,11 @@ h1 {
     color: var(--silver);
 }
 
+.gsr .icon-wrapper {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--accent);
+}
+
 .card-header h2 {
     font-size: 0.95rem;
     font-weight: 600;
@@ -220,7 +225,7 @@ h1 {
 }
 
 .amount {
-    font-size: 1.85rem;
+    font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1;
@@ -233,6 +238,10 @@ h1 {
 
 .silver .amount {
     color: var(--silver);
+}
+
+.gsr .amount {
+    color: var(--text-primary);
 }
 
 .amount.price-up {

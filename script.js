@@ -81,6 +81,10 @@ async function fetchRates() {
         setValue('silver-usd', data.xagUsd, 2);
         setValue('usd-inr', data.usdInr, 2);
 
+        // Update GSR Ratio
+        const gsr = data.xauUsd / data.xagUsd;
+        setValue('gsr-value', gsr, 2);
+
         // Update calculation breakdown
         setValue('calc-gold-oz', data.goldInrPerOunce, 2);
         setValue('calc-gold-customs', data.goldAfterCustoms, 2);
