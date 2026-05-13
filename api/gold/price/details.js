@@ -28,13 +28,13 @@ export default async function handler(req, res) {
 
         // Gold
         const goldInrPerOunce = xauUsd * usdInr;
-        const goldAfterCustoms = goldInrPerOunce * 1.06;
+        const goldAfterCustoms = goldInrPerOunce * 1.15;
         const goldAfterGst = goldAfterCustoms * 1.03;
         const goldPricePerGramInr = goldAfterGst / 31.103;
 
         // Silver
         const silverInrPerOunce = xagUsd * usdInr;
-        const silverAfterCustoms = silverInrPerOunce * 1.06;
+        const silverAfterCustoms = silverInrPerOunce * 1.15;
         const silverAfterGst = silverAfterCustoms * 1.03;
         const silverPricePerGramInr = silverAfterGst / 31.103;
 
